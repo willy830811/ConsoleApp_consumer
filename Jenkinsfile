@@ -16,12 +16,12 @@ pipeline {
          }
         stage('Build'){
            steps{
-               sh 'dotnet build ConsoleApp_consumer.csproj --configuration Release'
+               sh 'dotnet build ConsoleApp_consumer.sln --configuration Release'
             }
          }
         stage('Publish'){
              steps{
-               sh 'dotnet publish ConsoleApp_consumer.csproj --configuration Release --no-restore'
+               sh 'dotnet publish ConsoleApp_consumer.csproj --configuration Release'
              }
         }
     }
