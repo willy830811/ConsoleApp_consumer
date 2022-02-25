@@ -16,7 +16,7 @@ pipeline {
          }
         stage('Build'){
            steps{
-               sh 'dotnet build ConsoleApp_consumer.sln --configuration Release --no-restore'
+               sh 'dotnet build ConsoleApp_consumer.csproj --configuration Release'
             }
          }
         stage('Publish'){
