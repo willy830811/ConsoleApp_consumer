@@ -6,7 +6,7 @@ namespace ConsoleApp_consumer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World! yo!");
+            Console.WriteLine("Hello World! yo! lalala~");
         }
     }
 }
