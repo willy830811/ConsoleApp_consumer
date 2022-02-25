@@ -24,10 +24,5 @@ pipeline {
                sh 'dotnet publish ConsoleApp_consumer.csproj --configuration Release --no-restore'
              }
         }
-        stage('Deploy'){
-             steps{
-               sh 'cd ConsoleApp_consumer/bin/Debug/net5.0/publish/'
-             }
-        }
     }
 }
