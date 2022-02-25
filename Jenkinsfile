@@ -6,27 +6,22 @@ pipeline {
     stages {
         stage('Restore packages'){
            steps{
-               sh 'dotnet restore WebApplication.sln'
+               sh 'dotnet restore ConsoleApp_consumer.sln'
             }
          }
         stage('Clean'){
            steps{
-               sh 'dotnet clean WebApplication.sln --configuration Release'
+               sh 'dotnet clean ConsoleApp_consumer.sln --configuration Release'
             }
          }
         stage('Build'){
            steps{
-               sh 'dotnet build WebApplication.sln --configuration Release --no-restore'
+               sh 'dotnet build ConsoleApp_consumer.sln --configuration Release --no-restore'
             }
          }
-        stage('Test: Unit Test'){
-           steps {
-                sh 'dotnet test XUnitTestProject/XUnitTestProject.csproj --configuration Release --no-restore'
-             }
-          }
         stage('Publish'){
              steps{
-               sh 'dotnet publish WebApplication/WebApplication.csproj --configuration Release --no-restore'
+               sh 'dotnet publish ConsoleApp_consumer/ConsoleApp_consumer.csproj --configuration Release --no-restore'
              }
         }
         stage('Deploy'){
@@ -34,8 +29,8 @@ pipeline {
                sh '''for pid in $(lsof -t -i:9090); do
                        kill -9 $pid
                done'''
-               sh 'cd WebApplication/bin/Release/netcoreapp3.1/publish/'
-               sh 'nohup dotnet WebApplication.dll --urls="http://104.128.91.189:9090" --ip="104.128.91.189" --port=9090 --no-restore > /dev/null 2>&1 &'
+               sh 'cd ConsoleApp_consumer/bin/Debug/net5.0/publish/'
+               sh 'nohup dotnet ConsoleApp_consumer.dll --urls="http://104.128.91.189:9090" --ip="104.128.91.189" --port=9090 --no-restore > /dev/null 2>&1 &'
              }
         }
     }
